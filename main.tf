@@ -1,8 +1,3 @@
-provider "aws" {
-  region = "us-west-2"
-}
-
-
 resource "aws_s3_bucket" "default" {
   count         = module.this.enabled ? 1 : 0
   bucket        = module.this.id
