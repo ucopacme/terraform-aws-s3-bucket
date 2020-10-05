@@ -1,10 +1,10 @@
 output "bucket_domain_name" {
-  value       = module.this.enabled ? join("", aws_s3_bucket.this.*.bucket_domain_name) : ""
+  value       = aws_s3_bucket.this.*.bucket_domain_name
   description = "FQDN of bucket"
 }
 
 output "bucket_regional_domain_name" {
-  value       = module.this.enabled ? join("", aws_s3_bucket.this.*.bucket_regional_domain_name) : ""
+  value       = aws_s3_bucket.this.*.bucket_regional_domain_name
   description = "The bucket region-specific domain name"
 }
 
@@ -14,12 +14,12 @@ output "bucket_id" {
 }
 
 output "bucket_arn" {
-  value       = module.this.enabled ? join("", aws_s3_bucket.this.*.arn) : ""
+  value       =  aws_s3_bucket.this.*.arn
   description = "Bucket ARN"
 }
 
 output "bucket_region" {
-  value       = module.this.enabled ? join("", aws_s3_bucket.this.*.region) : ""
+  value       =  aws_s3_bucket.this.*.region
   description = "Bucket region"
 }
 
