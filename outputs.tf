@@ -23,10 +23,10 @@ output "bucket_region" {
   description = "Bucket region"
 }
 
-output "enabled" {
-  value       = module.this.enabled
-  description = "Is module enabled"
-}
+#output "enabled" {
+#  value       = module.this.enabled
+#  description = "Is module enabled"
+#}
 
 #output "user_enabled" {
 #  value       = var.user_enabled
@@ -48,14 +48,14 @@ output "enabled" {
 #  description = "The user unique ID assigned by AWS"
 #}
 
-output "access_key_id" {
-  sensitive   = true
-  value       = module.s3_user.access_key_id
-  description = "The access key ID"
-}
-
-output "secret_access_key" {
-  sensitive   = true
-  value       = module.s3_user.secret_access_key
-  description = "The secret access key. This will be written to the state file in plain-text"
-}
+#output "access_key_id" {
+#  sensitive   = true
+#  value       = module.s3_user.access_key_id
+#  description = "The access key ID"
+#}
+#
+#output "secret_access_key" {
+#  sensitive   = true
+#  value       = module.s3_user.secret_access_key
+#  description = "The secret access key. This will be written to the state file in plain-text"
+#}
