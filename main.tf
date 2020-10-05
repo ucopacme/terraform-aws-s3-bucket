@@ -6,10 +6,6 @@ resource "aws_s3_bucket" "this" {
   tags       = merge(var.tags, map("Name", var.name))
 }
 
-versioning {
-    enabled = var.versioning_enabled
-  }
-
 resource "aws_s3_bucket_public_access_block" "this" {
   bucket = aws_s3_bucket.this.*.id
 
