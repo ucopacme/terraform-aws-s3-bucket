@@ -6,7 +6,6 @@ variable "acl" {
 
 variable "bucket" {
   type        = string
-  default     = ""
   description = "S3 Bucket name" 
 }
 
