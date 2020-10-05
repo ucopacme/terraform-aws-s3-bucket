@@ -9,7 +9,7 @@ output "bucket_regional_domain_name" {
 }
 
 output "bucket_id" {
-  value       = module.this.enabled ? join("", aws_s3_bucket.this.*.id) : ""
+  value       = aws_s3_bucket.this.*.id 
   description = "Bucket Name (aka ID)"
 }
 
