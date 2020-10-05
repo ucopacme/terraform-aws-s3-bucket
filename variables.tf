@@ -27,6 +27,11 @@ variable "block_public_policy" {
   default     = true
   description = "Set to `false` to disable the blocking of new public policies on the bucket"
 }
+variable "force_destroy" {
+  type        = bool
+  default     = false
+  description = "A boolean string that indicates all objects should be deleted from the bucket so that the bucket can be destroyed without error. These objects are not recoverable"
+}
 
 variable "ignore_public_acls" {
   type        = bool
