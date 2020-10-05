@@ -16,66 +16,6 @@ variable "enabled" {
   type        = bool
 }
 
-variable "grants" {
-  type = list(object({
-    id          = string
-    type        = string
-    permissions = list(string)
-    uri         = string
-  }))
-  default = null
-
-  description = "An ACL policy grant. Conflicts with `acl`. Set `acl` to `null` to use this."
-}
-
-variable "policy" {
-  type        = string
-  default     = ""
-  description = "A valid bucket policy JSON document. Note that if the policy document is not specific enough (but still valid), Terraform may view the policy as constantly changing in a terraform plan. In this case, please make sure you use the verbose/specific version of the policy"
-}
-
-variable "tags" {
-  default     = {}
-  description = "A map of tags to add to all resources"
-  type        = map(string)
-}
-
-variable "force_destroy" {
-  type        = bool
-  default     = false
-  description = "A boolean string that indicates all objects should be deleted from the bucket so that the bucket can be destroyed without error. These objects are not recoverable"
-}
-
-variable "versioning_enabled" {
-  type        = bool
-  default     = false
-  description = "A state of versioning. Versioning is a means of keeping multiple variants of an object in the same bucket"
-}
-
-variable "sse_algorithm" {
-  type        = string
-  default     = "AES256"
-  description = "The server-side encryption algorithm to use. Valid values are `AES256` and `aws:kms`"
-}
-
-variable "kms_master_key_arn" {
-  type        = string
-  default     = ""
-  description = "The AWS KMS master key ARN used for the `SSE-KMS` encryption. This can only be used when you set the value of `sse_algorithm` as `aws:kms`. The default aws/s3 AWS KMS master key is used if this element is absent while the `sse_algorithm` is `aws:kms`"
-}
-
-variable "allowed_bucket_actions" {
-  type        = list(string)
-  default     = ["s3:PutObject", "s3:PutObjectAcl", "s3:GetObject", "s3:DeleteObject", "s3:ListBucket", "s3:ListBucketMultipartUploads", "s3:GetBucketLocation", "s3:AbortMultipartUpload"]
-  description = "List of actions the user is permitted to perform on the S3 bucket"
-}
-
-variable "prefix" {
-  type        = string
-  default     = ""
-  description = "Prefix identifying one or more objects to which the rule applies"
-}
-
 variable "block_public_acls" {
   type        = bool
   default     = true
