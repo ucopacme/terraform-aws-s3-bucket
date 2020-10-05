@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "this" {
 
   server_side_encryption_configuration {
     rule {
-      apply_server_side_encryption_by_default {
+      apply_server_side_encryption_by_this {
         sse_algorithm     = var.sse_algorithm
         kms_master_key_id = var.kms_master_key_arn
       }
@@ -42,7 +42,7 @@ data "aws_iam_policy_document" "bucket_policy" {
     sid       = "DenyIncorrectEncryptionHeader"
     effect    = "Deny"
     actions   = ["s3:PutObject"]
-    resources = ["arn:${data.aws_partition.current.partition}:s3:::${join("", aws_s3_bucket.default.*.id)}/*"]
+    resources = ["arn:${data.aws_partition.current.partition}:s3:::${join("", aws_s3_bucket.this.*.id)}/*"]
 
     principals {
       identifiers = ["*"]
@@ -60,7 +60,7 @@ data "aws_iam_policy_document" "bucket_policy" {
     sid       = "DenyUnEncryptedObjectUploads"
     effect    = "Deny"
     actions   = ["s3:PutObject"]
-    resources = ["arn:${data.aws_partition.current.partition}:s3:::${join("", aws_s3_bucket.default.*.id)}/*"]
+    resources = ["arn:${data.aws_partition.current.partition}:s3:::${join("", aws_s3_bucket.this.*.id)}/*"]
 
     principals {
       identifiers = ["*"]
@@ -77,14 +77,14 @@ data "aws_iam_policy_document" "bucket_policy" {
 
 resource "aws_s3_bucket_policy" "this" {
   count      = module.this.enabled && var.allow_encrypted_uploads_only ? 1 : 0
-  bucket     = join("", aws_s3_bucket.default.*.id)
+  bucket     = join("", aws_s3_bucket.this.*.id)
   policy     = join("", data.aws_iam_policy_document.bucket_policy.*.json)
-  depends_on = [aws_s3_bucket_public_access_block.default]
+  depends_on = [aws_s3_bucket_public_access_block.this]
 }
 
 resource "aws_s3_bucket_public_access_block" "this" {
   count  = module.this.enabled ? 1 : 0
-  bucket = join("", aws_s3_bucket.default.*.id)
+  bucket = join("", aws_s3_bucket.this.*.id)
 
   block_public_acls       = var.block_public_acls
   block_public_policy     = var.block_public_policy
