@@ -46,59 +46,16 @@ variable "kms_master_key_arn" {
   description = "The AWS KMS master key ARN used for the `SSE-KMS` encryption. This can only be used when you set the value of `sse_algorithm` as `aws:kms`. The default aws/s3 AWS KMS master key is used if this element is absent while the `sse_algorithm` is `aws:kms`"
 }
 
-
 variable "allowed_bucket_actions" {
   type        = list(string)
   default     = ["s3:PutObject", "s3:PutObjectAcl", "s3:GetObject", "s3:DeleteObject", "s3:ListBucket", "s3:ListBucketMultipartUploads", "s3:GetBucketLocation", "s3:AbortMultipartUpload"]
   description = "List of actions the user is permitted to perform on the S3 bucket"
 }
 
-variable "lifecycle_rule_enabled" {
-  type        = bool
-  default     = false
-  description = "Enable or disable lifecycle rule"
-}
-
 variable "prefix" {
   type        = string
   default     = ""
   description = "Prefix identifying one or more objects to which the rule applies"
-}
-
-variable "noncurrent_version_transition_days" {
-  type        = number
-  default     = 30
-  description = "Number of days to persist in the standard storage tier before moving to the glacier tier infrequent access tier"
-}
-
-variable "noncurrent_version_expiration_days" {
-  type        = number
-  default     = 90
-  description = "Specifies when noncurrent object versions expire"
-}
-
-variable "enable_standard_ia_transition" {
-  type        = bool
-  default     = false
-  description = "Enables the transition to STANDARD_IA"
-}
-
-variable "expiration_days" {
-  type        = number
-  default     = 90
-  description = "Number of days after which to expunge the objects"
-}
-
-variable "abort_incomplete_multipart_upload_days" {
-  type        = number
-  default     = 5
-  description = "Maximum time (in days) that you want to allow multipart uploads to remain in progress"
-}
-
-variable "lifecycle_tags" {
-  type        = map(string)
-  description = "Tags filter. Used to manage object lifecycle events"
-  default     = {}
 }
 
 variable "block_public_acls" {

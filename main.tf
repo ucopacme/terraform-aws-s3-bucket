@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "default" {
+resource "aws_s3_bucket" "this" {
   count         = module.this.enabled ? 1 : 0
   bucket        = module.this.id
   acl           = try(length(var.grants), 0) == 0 ? var.acl : null
@@ -10,31 +10,6 @@ resource "aws_s3_bucket" "default" {
     enabled = var.versioning_enabled
   }
 
-  lifecycle_rule {
-    id                                     = module.this.id
-    enabled                                = var.lifecycle_rule_enabled
-    prefix                                 = var.prefix
-    tags                                   = var.lifecycle_tags
-    abort_incomplete_multipart_upload_days = var.abort_incomplete_multipart_upload_days
-
-    noncurrent_version_expiration {
-      days = var.noncurrent_version_expiration_days
-    }
-
-    dynamic "noncurrent_version_transition" {
-      for_each = var.enable_glacier_transition ? [1] : []
-
-      content {
-        days          = var.noncurrent_version_transition_days
-        storage_class = "GLACIER"
-      }
-    }
-
-    expiration {
-      days = var.expiration_days
-    }
-  }
-
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
@@ -42,6 +17,8 @@ resource "aws_s3_bucket" "default" {
         kms_master_key_id = var.kms_master_key_arn
       }
     }
+  }
+
   }
 
   dynamic "grant" {
@@ -98,14 +75,14 @@ data "aws_iam_policy_document" "bucket_policy" {
   }
 }
 
-resource "aws_s3_bucket_policy" "default" {
+resource "aws_s3_bucket_policy" "this" {
   count      = module.this.enabled && var.allow_encrypted_uploads_only ? 1 : 0
   bucket     = join("", aws_s3_bucket.default.*.id)
   policy     = join("", data.aws_iam_policy_document.bucket_policy.*.json)
   depends_on = [aws_s3_bucket_public_access_block.default]
 }
 
-resource "aws_s3_bucket_public_access_block" "default" {
+resource "aws_s3_bucket_public_access_block" "this" {
   count  = module.this.enabled ? 1 : 0
   bucket = join("", aws_s3_bucket.default.*.id)
 
