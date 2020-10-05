@@ -6,7 +6,7 @@ resource "aws_s3_bucket" "this" {
   acl           = try(length(var.grants), 0) == 0 ? var.acl : null
   force_destroy = var.force_destroy
   policy        = var.policy
-  tags       = merge(var.tags, map("Name", var.name))
+#  tags       = merge(var.tags, map("Name", var.name))
 
   versioning {
     enabled = var.versioning_enabled
