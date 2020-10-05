@@ -12,17 +12,17 @@ resource "aws_s3_bucket" "this" {
     enabled = var.versioning_enabled
   }
 
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_this {
-        sse_algorithm     = var.sse_algorithm
-        kms_master_key_id = var.kms_master_key_arn
-      }
-    }
-  }
-
-  }
-
+#  server_side_encryption_configuration {
+#    rule {
+#      apply_server_side_encryption_by_this {
+#        sse_algorithm     = var.sse_algorithm
+#        kms_master_key_id = var.kms_master_key_arn
+#      }
+#    }
+#  }
+#
+#  }
+#
 #data "aws_partition" "current" {}
 
 #data "aws_iam_policy_document" "bucket_policy" {
