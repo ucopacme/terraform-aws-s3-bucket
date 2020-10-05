@@ -4,11 +4,11 @@ variable "acl" {
   description = "The [canned ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl) to apply. We recommend `private` to avoid exposing sensitive information. Conflicts with `grants`."
 }
 
-#variable "bucket" {
-#  type        = string
-#  default     = ""
-#  description = "S3 Bucket name" 
-#}
+variable "bucket" {
+  type        = string
+  default     = ""
+  description = "S3 Bucket name" 
+}
 
 variable "enabled" {
   default     = true
