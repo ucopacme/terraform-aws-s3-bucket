@@ -73,8 +73,7 @@ resource "aws_s3_bucket" "this" {
 #}
 
 resource "aws_s3_bucket_public_access_block" "this" {
-  count  = module.this.enabled ? 1 : 0
-  bucket = join("", aws_s3_bucket.this.*.id)
+  bucket = aws_s3_bucket.this.*.id
 
   block_public_acls       = var.block_public_acls
   block_public_policy     = var.block_public_policy
