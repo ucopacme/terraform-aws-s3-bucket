@@ -21,18 +21,6 @@ resource "aws_s3_bucket" "this" {
 
   }
 
-  dynamic "grant" {
-    for_each = try(length(var.grants), 0) == 0 || try(length(var.acl), 0) > 0 ? [] : var.grants
-
-    content {
-      id          = grant.value.id
-      type        = grant.value.type
-      permissions = grant.value.permissions
-      uri         = grant.value.uri
-    }
-  }
-}
-
 data "aws_partition" "current" {}
 
 data "aws_iam_policy_document" "bucket_policy" {
