@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "this" {
   acl    = "private"
   bucket = var.bucket
-  count      = var.enabled ? 1 : 0
+#  count      = var.enabled ? 1 : 0
   force_destroy = var.force_destroy
 #  tags       = merge(var.tags, map("Name", var.name))
 }
