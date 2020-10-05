@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "this" {
   bucket = var.bucket
   count      = var.enabled ? 1 : 0
   force_destroy = var.force_destroy
-  tags       = merge(var.tags, map("Name", var.name))
+#  tags       = merge(var.tags, map("Name", var.name))
 }
 
 resource "aws_s3_bucket_public_access_block" "this" {
