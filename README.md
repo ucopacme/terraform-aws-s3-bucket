@@ -49,3 +49,7 @@ No requirements.
 | bucket\_arn | Bucket ARN |
 | bucket\_id | Bucket ID |
 | bucket\_name | Bucket Name |
+| bucket\_regional\_name | The AWS CloudFront allows specifying S3 region-specific endpoint when creating S3 origin, it will prevent redirect issues from CloudFront to S3 Origin URL. |
+| hosted\_zone\_id | The Route 53 Hosted Zone ID for this bucket's region. |
+| website\_domain | The domain of the website endpoint, if the bucket is configured with a website. If not, this will be an empty string. This is used to create Route 53 alias records. |
+| website\_endpoint | The website endpoint, if the bucket is configured with a website. If not, this will be an empty string. |
