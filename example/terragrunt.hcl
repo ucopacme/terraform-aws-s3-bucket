@@ -1,6 +1,7 @@
 inputs = {
-  enabled = true
-  bucket  = join("-", [local.application, local.environment, "bucket"])
+  bucket        = join("-", [local.application, local.environment, "bucket"])
+  enabled       = true
+  sse_algorithm = "aws:kms"
   tags = {
     "ucop:application" = local.application
     "ucop:createdBy"   = local.createdBy
