@@ -11,7 +11,7 @@ resource "aws_s3_bucket" "this" {
       }
     }
   }
-  tags          = merge(var.tags, map("Name", var.bucket))
+  tags = merge(var.tags, map("Name", var.bucket))
   versioning {
     enabled = var.versioning_enabled
   }
