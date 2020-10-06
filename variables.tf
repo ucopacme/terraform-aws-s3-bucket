@@ -62,6 +62,11 @@ variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map(string)
 }
+variable "statement" {
+  default     = {}
+  description = "Policy Statments to use"
+  type        = map(string)
+}
 
 variable "user_enabled" {
   type        = bool

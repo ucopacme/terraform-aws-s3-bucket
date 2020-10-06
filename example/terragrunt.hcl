@@ -9,14 +9,15 @@ inputs = {
     "ucop:group"       = local.group
     "ucop:source"      = local.source
   }
+  #  statement          = {}
   versioning_enabled = true
 }
 
 locals {
-  application = "wheres-my-super-suit"
+  application = "david"
   createdBy   = "edna.mode@incredibl.es"
   environment = "prod"
-  group       = "incredibles"
+  group       = "chs"
   source      = "https://github.com/ucopacme/terraform-aws-vpn.git"
 }
 

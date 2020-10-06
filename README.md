@@ -38,6 +38,7 @@ No requirements.
 | restrict\_public\_buckets | Set to `false` to disable the restricting of making the bucket public | `bool` | `true` | no |
 | sse\_algorithm | The server-side encryption algorithm to use. Valid values are `AES256` and `aws:kms` | `string` | `"AES256"` | no |
 | standard\_transition\_days | Number of days to persist in the standard storage tier before moving to the infrequent access tier | `number` | `30` | no |
+| statement | Policy Statments to use | `map(string)` | `{}` | no |
 | tags | A map of tags to add to all resources | `map(string)` | `{}` | no |
 | user\_enabled | Set to `true` to create an IAM user with permission to access the bucket | `bool` | `false` | no |
 | versioning\_enabled | A state of versioning. Versioning is a means of keeping multiple variants of an object in the same bucket | `bool` | `false` | no |
