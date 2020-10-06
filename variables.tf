@@ -4,17 +4,6 @@ variable "acl" {
   description = "The [canned ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl) to apply. We recommend `private` to avoid exposing sensitive information. Conflicts with `grants`."
 }
 
-variable "bucket" {
-  type        = string
-  description = "S3 Bucket name" 
-}
-
-variable "enabled" {
-  default     = true
-  description = "Set to `false` to prevent the module from creating resources"
-  type        = bool
-}
-
 variable "block_public_acls" {
   type        = bool
   default     = true
@@ -26,6 +15,18 @@ variable "block_public_policy" {
   default     = true
   description = "Set to `false` to disable the blocking of new public policies on the bucket"
 }
+
+variable "bucket" {
+  type        = string
+  description = "S3 Bucket name"
+}
+
+variable "enabled" {
+  default     = true
+  description = "Set to `false` to prevent the module from creating resources"
+  type        = bool
+}
+
 variable "force_destroy" {
   type        = bool
   default     = false
@@ -42,4 +43,10 @@ variable "restrict_public_buckets" {
   type        = bool
   default     = true
   description = "Set to `false` to disable the restricting of making the bucket public"
+}
+
+variable "tags" {
+  default     = {}
+  description = "A map of tags to add to all resources"
+  type        = map(string)
 }
