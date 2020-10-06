@@ -8,6 +8,7 @@ inputs = {
     "ucop:group"       = local.group
     "ucop:source"      = local.source
   }
+  versioning_enabled = true
 }
 
 locals {

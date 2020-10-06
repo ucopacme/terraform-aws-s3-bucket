@@ -3,7 +3,18 @@ resource "aws_s3_bucket" "this" {
   bucket        = var.bucket
   count         = var.enabled ? 1 : 0
   force_destroy = var.force_destroy
-  tags          = merge(var.tags, map("Name", var.bucket))
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm     = var.sse_algorithm
+        kms_master_key_id = var.kms_master_key_arn
+      }
+    }
+  }
+  tags = merge(var.tags, map("Name", var.bucket))
+  versioning {
+    enabled = var.versioning_enabled
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "this" {
