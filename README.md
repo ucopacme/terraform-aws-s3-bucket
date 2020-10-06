@@ -46,4 +46,6 @@ No requirements.
 
 | Name | Description |
 |------|-------------|
-| bucket | n/a |
+| bucket\_arn | Bucket ARN |
+| bucket\_id | Bucket ID |
+| bucket\_name | Bucket Name |
