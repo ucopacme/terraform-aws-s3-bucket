@@ -1,0 +1,18 @@
+{
+  "Statement": [
+    {
+      "Action": [
+        "s3:*"
+      ],
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "${aws_iam_user.user.arn}"
+      },
+      "Resource": [
+        "${aws_s3_bucket.outputs.bucket_arn}",
+        "${aws_s3_bucket.outputs.bucket_arn}/*"
+      ]
+    }
+  ],
+  "Version": "2012-10-17"
+}

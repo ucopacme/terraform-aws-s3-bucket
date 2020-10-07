@@ -1,6 +1,7 @@
 inputs = {
   bucket        = join("-", [local.application, local.environment, "bucket"])
   enabled       = true
+  policy        = local.policy
   sse_algorithm = "aws:kms"
   tags = {
     "ucop:application" = local.application
@@ -17,6 +18,7 @@ locals {
   createdBy   = "edna.mode@incredibl.es"
   environment = "prod"
   group       = "incredibles"
+  policy      = jsondecode(file("./policy.json"))
   source      = "https://github.com/ucopacme/terraform-aws-vpn.git"
 }
 
