@@ -14,6 +14,11 @@ variable "enabled" {
   description = "Set to `false` to prevent the module from creating resources"
   type        = bool
 }
+variable "policy_enabled" {
+  default     = false
+  description = "Set to `false` to prevent the module from creating resources"
+  type        = bool
+}
 
 variable "grants" {
   type = list(object({
@@ -40,8 +45,8 @@ variable "force_destroy" {
 }
 
 variable "versioning_enabled" {
-  type        = bool
-  default     = false
+  type        = string
+  default     = "Disabled"
   description = "A state of versioning. Versioning is a means of keeping multiple variants of an object in the same bucket"
 }
 
@@ -69,11 +74,6 @@ variable "user_enabled" {
   description = "Set to `true` to create an IAM user with permission to access the bucket"
 }
 
-variable "allowed_bucket_actions" {
-  type        = list(string)
-  default     = ["s3:PutObject", "s3:PutObjectAcl", "s3:GetObject", "s3:DeleteObject", "s3:ListBucket", "s3:ListBucketMultipartUploads", "s3:GetBucketLocation", "s3:AbortMultipartUpload"]
-  description = "List of actions the user is permitted to perform on the S3 bucket"
-}
 
 variable "allow_encrypted_uploads_only" {
   type        = bool
@@ -81,84 +81,6 @@ variable "allow_encrypted_uploads_only" {
   description = "Set to `true` to prevent uploads of unencrypted objects to S3 bucket"
 }
 
-variable "lifecycle_rule_enabled" {
-  type        = bool
-  default     = false
-  description = "Enable or disable lifecycle rule"
-}
-
-variable "prefix" {
-  type        = string
-  default     = ""
-  description = "Prefix identifying one or more objects to which the rule applies"
-}
-
-variable "noncurrent_version_transition_days" {
-  type        = number
-  default     = 30
-  description = "Number of days to persist in the standard storage tier before moving to the glacier tier infrequent access tier"
-}
-
-variable "noncurrent_version_expiration_days" {
-  type        = number
-  default     = 90
-  description = "Specifies when noncurrent object versions expire"
-}
-
-variable "cors_rule_inputs" {
-  type = list(object({
-    allowed_headers = list(string)
-    allowed_methods = list(string)
-    allowed_origins = list(string)
-    expose_headers  = list(string)
-    max_age_seconds = number
-  }))
-  default = null
-
-  description = "Specifies the allowed headers, methods, origins and exposed headers when using CORS on this bucket"
-}
-
-variable "standard_transition_days" {
-  type        = number
-  default     = 30
-  description = "Number of days to persist in the standard storage tier before moving to the infrequent access tier"
-}
-
-variable "glacier_transition_days" {
-  type        = number
-  default     = 60
-  description = "Number of days after which to move the data to the glacier storage tier"
-}
-
-variable "enable_glacier_transition" {
-  type        = bool
-  default     = true
-  description = "Enables the transition to AWS Glacier which can cause unnecessary costs for huge amount of small files"
-}
-
-variable "enable_standard_ia_transition" {
-  type        = bool
-  default     = false
-  description = "Enables the transition to STANDARD_IA"
-}
-
-variable "expiration_days" {
-  type        = number
-  default     = 90
-  description = "Number of days after which to expunge the objects"
-}
-
-variable "abort_incomplete_multipart_upload_days" {
-  type        = number
-  default     = 5
-  description = "Maximum time (in days) that you want to allow multipart uploads to remain in progress"
-}
-
-variable "lifecycle_tags" {
-  type        = map(string)
-  description = "Tags filter. Used to manage object lifecycle events"
-  default     = {}
-}
 
 variable "block_public_acls" {
   type        = bool
