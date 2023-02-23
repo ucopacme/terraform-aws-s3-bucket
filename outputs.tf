@@ -7,7 +7,7 @@ output "bucket_id" {
   description = "Bucket ID"
 }
 output "bucket_arn" {
-  value       = aws_s3_bucket.this.*.arn
+  value       = join("", aws_s3_bucket.this.*.arn)
   description = "Bucket ARN"
 }
 output "bucket_regional_name" {
