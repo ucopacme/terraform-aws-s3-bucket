@@ -23,10 +23,6 @@ resource "aws_s3_bucket_versioning" "this" {
   }
 }
 #
-resource "aws_s3_bucket_acl" "this" {
-  bucket = join("", aws_s3_bucket.this.*.id)
-  acl    = var.acl
-}
 resource "aws_s3_bucket_public_access_block" "this" {
   block_public_acls       = var.block_public_acls
   block_public_policy     = var.block_public_policy
