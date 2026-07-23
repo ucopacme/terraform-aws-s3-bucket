@@ -27,6 +27,8 @@ No requirements.
 | glacier\_transition\_days | Number of days after which to move the data to the glacier storage tier | `number` | `60` | no |
 | ignore\_public\_acls | Set to `false` to disable the ignoring of public access lists on the bucket | `bool` | `true` | no |
 | kms\_master\_key\_arn | The AWS KMS master key ARN used for the `SSE-KMS` encryption. This can only be used when you set the value of `sse_algorithm` as `aws:kms`. The default aws/s3 AWS KMS master key is used if this element is absent while the `sse_algorithm` is `aws:kms` | `string` | `""` | no |
+| bucket\_key\_enabled | Whether to use an S3 Bucket Key for SSE-KMS | `bool` | `false` | no |
+| blocked\_encryption\_types | List of encryption types to block. AWS defaults to blocking SSE-C. | `list(string)` | `["SSE-C"]` | no |
 | lifecycle\_rule\_enabled | Enable or disable lifecycle rule | `bool` | `false` | no |
 | lifecycle\_tags | Tags filter. Used to manage object lifecycle events | `map(string)` | `{}` | no |
 | noncurrent\_version\_expiration\_days | Specifies when noncurrent object versions expire | `number` | `90` | no |
