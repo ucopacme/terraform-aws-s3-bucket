@@ -2,7 +2,7 @@ resource "aws_s3_bucket" "this" {
   bucket        = var.bucket
   count         = var.enabled ? 1 : 0
   force_destroy = var.force_destroy
-  tags = merge(var.tags, tomap({"Name" = var.bucket}))
+  tags          = merge(var.tags, tomap({ "Name" = var.bucket }))
 }
 #
 resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
@@ -45,4 +45,11 @@ resource "aws_s3_bucket_ownership_controls" "this" {
   rule {
     object_ownership = var.object_ownership
   }
+}
+
+resource "aws_s3_bucket_logging" "this" {
+  count         = var.logging_enabled ? 1 : 0
+  bucket        = join("", aws_s3_bucket.this.*.id)
+  target_bucket = var.logging_target_bucket
+  target_prefix = var.logging_target_prefix
 }
